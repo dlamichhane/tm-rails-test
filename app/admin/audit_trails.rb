@@ -1,6 +1,7 @@
 ActiveAdmin.register AuditTrail do
 	menu :label => "Audit", :priority => 11
-
+	actions :index
+	
 	index do
 		column "Id", :id
 		column "Campaign id" do |change_log|

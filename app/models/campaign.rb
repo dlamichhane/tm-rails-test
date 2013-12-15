@@ -7,7 +7,7 @@ class Campaign < ActiveRecord::Base
   attr_accessible :name, :budget, :platfroms_attributes, :platform_ids
 
   validates :name, presence: true
-  validates :budget, numericality: { greater_than: 0 }
+  validates :budget, presence: true, numericality: { greater_than: 0 }
   validate :has_platforms?
 
   def has_platforms?

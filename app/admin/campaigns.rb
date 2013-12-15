@@ -24,18 +24,24 @@ ActiveAdmin.register Campaign do
 
     def update
       @campaign = Campaign.find(params[:id])
-      @campaign.update_attributes!(params[:campaign])
+      @campaign.update_attributes(params[:campaign])
 
-      if check_budget?(params[:campaign][:budget])
-          audit = AuditTrail.new
-          audit.action = params[:action]
-          audit.change_logs = {id:  @campaign.id, name: @campaign.name, budget: @campaign.budget, platforms: @campaign.platforms.collect(&:name).join(', ')}
-          audit.campaign_id = @campaign.id
-          audit.save! 
-      end
+      if @campaign.valid?
+        if check_budget?(params[:campaign][:budget])
+            audit = AuditTrail.new
+            audit.action = params[:action]
+            audit.change_logs = {id:  @campaign.id, name: @campaign.name, budget: @campaign.budget, platforms: @campaign.platforms.collect(&:name).join(', ')}
+            audit.campaign_id = @campaign.id
+            audit.save! 
+        end
 
-      update! do |format|
-        format.html { redirect_to admin_campaigns_path }
+        update! do |format|
+          format.html { redirect_to admin_campaign_path }
+        end
+      else
+        update! do |format|
+          format.html { redirect_to edit_admin_campaign_path }
+        end
       end
     end
 
