@@ -1,5 +1,5 @@
 class AdminUser < ActiveRecord::Base 
-  before_create	:set_default_role
+  # before_create	:set_default_role
  
   belongs_to :role
   has_many  :campaigns
@@ -17,8 +17,8 @@ class AdminUser < ActiveRecord::Base
       return self.role.present? && self.role.name == role_name.to_s
   end
 
-  private
-  def set_default_role
-  	self.role_id ||= Role.find_by_name('admin').id
-  end
+  # private
+  # def set_default_role
+  # 	self.role_id ||= Role.find_by_name('admin').id
+  # end
 end
