@@ -1,33 +1,6 @@
 ## Trademob Rails Assignment
 
-### Getting started
-Fork this repository and set up the Rails test application in it on your machine. The application is based on Active Admin, take a look at [the documentation](http://www.activeadmin.info/documentation.html) to get started if you don't know it yet.
-
-The default user for the application is `admin@example.com` with the password `password`.
-
-You will find that we only minimally modified the boilerplate Active Admin application: there is a `Campaign` model with a name and budget, and an according Active Admin resource. 
-
-For this assignment, please take this application as a basis and make your changes to implement the following requirements.
-
-### Part 1: Platforms for campaigns
-
-Our campaigns are run on different (mobile) platforms such as Android and iOS. Our campaign managers want to set one or more platforms for each campaign in the application from a list of available platforms (for now, `Android` and `iOS`). Each campaign must have at least one platform. We want to be able to add more supported platforms in the future.
-
-### Part 2: Authorization and roles
-
-Campaign managers should be able to manage campaigns and in particular add and remove platforms from them. However, they should not be able to configure the generally available list of platforms. Only admins are allowed to do that (e.g. they may want to add `Windows` to the generally available platforms).
-
-Devise and implement a suitable solution for handling of the two different user roles `admin` and `campaign manager`. Please create a new campaign manager `cm@example.com` with the password `password` and supply a migration/seed task for this user.
-
-### Part 3: Audit trail for platform changes
-
-We would like to track all changes to the platform settings for campaigns with a budget of more than 1000€ (don't worry about the currency, it's not part of the model for simplicity). So, if a platform is added or removed from a campaign that has a budget of more than 1000€, we would like to store a record about this somewhere. All users (i.e. admins and campaign managers) can review the list of records for each campaign.
-
-### Wrapping up
-
-Once you are done with your implementation, send us a link. Make sure your solution works and includes all the necessary migrations.
-
-For testing we will perform the following steps:
+The application can be setup in the development environment by using the following steps:
 
 1. `git clone <your fork>`
 2. `bundle install`
@@ -35,6 +8,12 @@ For testing we will perform the following steps:
 4. `rake db:seed`
 5. `rails s`
 
-We should then be able to log in to the dashboard at `http://localhost:3000/admin` using either the `cm@example.com` or `admin@example.com` user.
+### Understanding and thoughts
 
-A bit of documentation about your implementation probably won't hurt either. Good luck!
+I would like to say that I had covered all the functionality according to the understading of the assignment requirements. In this stage, the design portion of the UI and the look and feel is not taken into consideration. The application also have some default settings of ActiveAdmin.
+
+### Implementation
+
+ Used the `gem cancan` for the authorization. It is used for assigning the Admin and Campaign manager role to the Admin user.
+
+ 
