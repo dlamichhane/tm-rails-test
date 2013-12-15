@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130917065950) do
+ActiveRecord::Schema.define(:version => 20131215121206) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -41,14 +41,41 @@ ActiveRecord::Schema.define(:version => 20130917065950) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "role_id"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "audit_trails", :force => true do |t|
+    t.integer  "campaign_id"
+    t.string   "action"
+    t.text     "change_logs"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "campaigns", :force => true do |t|
     t.string   "name"
     t.integer  "budget"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "admin_user_id"
+  end
+
+  create_table "campaigns_platforms", :id => false, :force => true do |t|
+    t.integer "campaign_id"
+    t.integer "platform_id"
+  end
+
+  create_table "platforms", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

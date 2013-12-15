@@ -57,7 +57,11 @@ ActiveAdmin.setup do |config|
   # within the controller.
   config.authentication_method = :authenticate_admin_user!
 
+  config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  config.cancan_ability_class = "AdminAbility"
 
+  config.on_unauthorized_access = :access_denied
+  
   # == Current User
   #
   # Active Admin will associate actions with the current
@@ -100,7 +104,7 @@ ActiveAdmin.setup do |config|
   # Admin comments are enabled by default.
   #
   # Default:
-  # config.allow_comments = true
+  config.allow_comments = false
   #
   # You can turn them on and off for any given namespace by using a
   # namespace config block.
@@ -208,3 +212,16 @@ ActiveAdmin.setup do |config|
 
 
 end
+
+# ActiveAdmin::ResourceController.class_eval do
+#   #  def current_user 
+#   #   current_admin_user 
+#   # end
+
+#   protected
+
+#   def current_ability
+#     p "#{current_admin_user}"
+#     @current_ability ||= AdminAbility.new(current_admin_user)
+#   end
+# end

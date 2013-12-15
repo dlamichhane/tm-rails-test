@@ -1,12 +1,16 @@
 TmRailsTest::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
+
   ActiveAdmin.routes(self)
+
+  # get 'admin/audit_trails' => 'admin/audit_trails#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
+
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
